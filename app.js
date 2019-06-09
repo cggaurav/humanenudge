@@ -7,8 +7,7 @@ const twitter = new Twitter({
 	access_token_secret: process.env.TWITTER_TOKEN_SECRET
 })
 
-
-const STATUSES = [`Are you scrolling intentionally or mindlessly right now? Friendly reminder to put this away if you don't mean to be here.`]
+const STATUSES = [`Are you scrolling intentionally or mindlessly right now? Friendly reminder to put this away if you don't mean to be here. #mindfulness #reminder`]
 
 twitter.post('statuses/update', { status: STATUSES[0] })
 	.then((s) => {
