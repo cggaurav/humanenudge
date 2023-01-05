@@ -8,9 +8,11 @@ const twitter = new Twitter({
 })
 
 const STATUSES = [
-	`Are you scrolling intentionally or mindlessly right now? Friendly reminder to put this away if you don't mean to be here. #mindfulness #reminder`,
-	`Are you wasting your valuable time? Friendly reminder to put this away if you don't mean to be here. #mindfulness #reminder`,
-	`Are you finding enough signal in your consumption here? Friendly reminder to put this away if you don't mean to be here. #mindfulness #reminder`
+	`Are you scrolling intentionally or mindlessly right now? Friendly reminder to put this away if you don't mean to be here. #mindfulness `,
+	`Are you finding enough signal in your consumption here? Friendly reminder to put this away if you don't mean to be here. #mindfulness`,
+	`Feeling dehydrated? Take a break and have some water. 💧🌊 #mindfulness`,
+	`Feeling stressed / anxious doom scrolling? 🌱 Please dont forget to take a few deep breaths #mindfulness`
+
 ]
 
 twitter.post('statuses/update', { status: STATUSES[Math.floor(Math.random() * STATUSES.length)] })
