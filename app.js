@@ -8,10 +8,14 @@ const twitter = new Twitter({
 })
 
 const STATUSES = [
-	`Are you scrolling intentionally or mindlessly right now? Friendly reminder to put this away if you don't mean to be here. #mindfulness `,
-	`Are you finding enough signal in your consumption here? Friendly reminder to put this away if you don't mean to be here. #mindfulness`,
-	`Feeling dehydrated? Take a break and have some water. 💧🌊 #mindfulness`,
-	`Feeling stressed / anxious doom scrolling? 🌱 Please dont forget to take a few deep breaths #mindfulness`
+	`Are you scrolling intentionally or mindlessly right now? Friendly reminder to put this away if you don't mean to be here. `,
+	`Are you finding enough signal in your consumption here? Friendly reminder to take a break.`,
+	`Feeling dehydrated? Take a break and have some water. 💧🌊`,
+	`Feeling stressed / anxious doom scrolling? 🌱 Please dont forget to take a few deep breaths`,
+	`It's okay if you don't finish all that you have to today. 📋`,
+	`Are you too hard on yourself? A friendly reminder to take a break`,
+	`Please dont forget to take a few deep breaths 🌱`,
+	`Remember to take some time to look up from twitter please`
 
 ]
 
