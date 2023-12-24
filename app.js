@@ -1,11 +1,8 @@
-const Twitter = require('twitter')
+const express = require('express')
+const { TwitterApi } = require('twitter-api-v2')
+const http = require('http')
 
-const twitter = new Twitter({
-	consumer_key: process.env.TWITTER_CONSUMER_KEY,
-	consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-	access_token_key: process.env.TWITTER_TOKEN_KEY,
-	access_token_secret: process.env.TWITTER_TOKEN_SECRET
-})
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 
 const STATUSES = [
 	`Are you scrolling intentionally or mindlessly right now? Friendly reminder to put this away if you don't mean to be here. `,
@@ -19,11 +16,39 @@ const STATUSES = [
 
 ]
 
-twitter.post('statuses/update', { status: STATUSES[Math.floor(Math.random() * STATUSES.length)] })
-	.then((s) => {
-		console.log(`Tweeting .. `, s)
-	})
-	.catch((e) => {
-		console.error('We have an error', e)
-	})
+const client = new TwitterApi({
+	appKey: process.env.TWITTER_CONSUMER_KEY,
+	appSecret: process.env.TWITTER_CONSUMER_SECRET,
+	accessToken: process.env.TWITTER_TOKEN_KEY,
+	accessSecret: process.env.TWITTER_TOKEN_SECRET
+});
+
+const rwClient = client.readWrite;
+
+let app = express();
+app.set('port', process.env.PORT || 3000)
+
+
+app.get('/api', (req, res) => {
+	console.log(`Tweeting .. `, STATUSES[Math.floor(Math.random() * STATUSES.length)])
+
+	rwClient.v2.tweet(STATUSES[Math.floor(Math.random() * STATUSES.length)])
+		.then(response => {
+			console.log('Tweeted:', response.data);
+			res.end(`Done #${JSON.stringify(response.data)}`);
+		})
+		.catch(error => {
+			console.error('Error:', error);
+			res.end(`Err ${error.message}`);
+		});
+
+});
+
+app.get('/', (req, res) => {
+	res.end('Humane Nudge')
+});
+
+http.createServer(app).listen(app.get('port'), () => {
+	console.log('Express server listening on port ' + app.get('port'))
+})
 
